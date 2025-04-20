@@ -30,12 +30,13 @@ public class Main {
                 case "add_rule":
                     addRule(centralPanel, part);
                     break;
-                case "check_rules":
-                    checkRules(centralPanel, part);
-                    break;
                 case "list_rules":
                     centralPanel.listRules();
                     break;
+                case "check_rules":
+                    checkRules(centralPanel, part);
+                    break;
+
                 default:
                     break;
             }
@@ -49,7 +50,7 @@ public class Main {
         String name = input[2];
         String protocol = input[3];
 
-        if (!type.equals("light") && !type.equals("thermostat")) {
+        if ( !type.equals("thermostat") && !type.equals("light")) {
             System.out.println("invalid input");
             return;
         }
