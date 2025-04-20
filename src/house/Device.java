@@ -1,3 +1,5 @@
+package house;
+
 public abstract class Device {
     protected String nameOfDevice ;
     protected String protocol ;

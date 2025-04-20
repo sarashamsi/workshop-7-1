@@ -1,3 +1,5 @@
+package house;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,6 +12,7 @@ public class CentralPanel {
     public void addDevice(String name, Device device) {
         devices.put(name, device);
     }
+
     public void removeDevice(String name) {
         devices.remove(name);
         for (int i=rules.size()-1 ; i>=0 ; i--){
@@ -19,6 +22,7 @@ public class CentralPanel {
             }
         }
     }
+
     public boolean hasRuleForDeviceAndTime(String deviceName, String time) {
         for (Rule rule : rules) {
             if (rule.getNameOfDevice().equals(deviceName) && rule.getTime().equals(time)) {
@@ -27,9 +31,11 @@ public class CentralPanel {
         }
         return false;
     }
+
     public void addRule(Rule rule) {
         rules.add(rule);
     }
+
     public void listDevices() throws Exception {
         if (devices.isEmpty()) {
             System.out.println();
