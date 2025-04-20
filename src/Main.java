@@ -5,18 +5,18 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws Exception {
         Scanner scan = new Scanner(System.in);
-        int q = Integer.parseInt(scan.nextLine()) ;
+        int q = Integer.parseInt(scan.nextLine());
         CentralPanel centralPanel = new CentralPanel();
         System.out.println();
 
-        for (int i=0 ; i<q ;i++){
+        for (int i = 0; i < q; i++) {
             String input = scan.nextLine().trim();
             String[] part = input.split(" ");
-            String str = part[0] ;
+            String str = part[0];
 
-            switch (str){
+            switch (str) {
                 case "add_device":
-                    addDevice(centralPanel,part);
+                    addDevice(centralPanel, part);
                     break;
                 case "set_device":
                     setDevice(centralPanel, part);
@@ -44,7 +44,7 @@ public class Main {
     }
 
 
-    public static void addDevice (CentralPanel centralPanel, String[] input){
+    public static void addDevice(CentralPanel centralPanel, String[] input) {
         String type = input[1];
         String name = input[2];
         String protocol = input[3];
@@ -71,7 +71,8 @@ public class Main {
         centralPanel.addDevice(name, device);
         System.out.println("device added successfully");
     }
-    public static void setDevice(CentralPanel centralPanel , String[] input) throws Exception {
+
+    public static void setDevice(CentralPanel centralPanel, String[] input) throws Exception {
         String name = input[1];
         String property = input[2];
         String value = input[3];
@@ -81,18 +82,18 @@ public class Main {
             return;
         }
         Device device = centralPanel.devices.get(name);
-        if (device instanceof Light){
-            if (property.equals("status") || property.equals("brightness")){
-                device.setProperty(property , value);
+        if (device instanceof Light) {
+            if (property.equals("status") || property.equals("brightness")) {
+                device.setProperty(property, value);
                 System.out.println("device updated successfully");
             } else {
                 System.out.println("invalid property");
                 return;
             }
         }
-        if (device instanceof Thermostat){
-            if (property.equals("status") || property.equals("temperature")){
-                device.setProperty(property , value);
+        if (device instanceof Thermostat) {
+            if (property.equals("status") || property.equals("temperature")) {
+                device.setProperty(property, value);
                 System.out.println("device updated successfully");
             } else {
                 System.out.println("invalid property");
@@ -101,7 +102,8 @@ public class Main {
         }
 
     }
-    public static void removeDevice (CentralPanel centralPanel , String[] input){
+
+    public static void removeDevice(CentralPanel centralPanel, String[] input) {
 
         String name = input[1];
         if (!centralPanel.devices.containsKey(name)) {
@@ -112,7 +114,7 @@ public class Main {
         System.out.println("device removed successfully");
     }
 
-    public static void addRule( CentralPanel centralPanel , String[] input){
+    public static void addRule(CentralPanel centralPanel, String[] input) {
 
         String deviceName = input[1];
         String time = input[2];
@@ -130,21 +132,20 @@ public class Main {
             System.out.println("duplicate rule");
             return;
         }
-        if (!validateTime(time)){
-            System.out.println("invalid time");
-            return;
-        }
+
 
         centralPanel.addRule(new Rule(deviceName, time, action));
         System.out.println("rule added successfully");
     }
 
-    public static void checkRules (CentralPanel centralPanel , String[] input){
+    public static void checkRules(CentralPanel centralPanel, String[] input) {
+
         String time = input[1];
         if (!validateTime(time)) {
             System.out.println("invalid time");
             return;
         }
+
         try {
             centralPanel.checkRules(time);
             System.out.println("rules checked");
@@ -159,12 +160,16 @@ public class Main {
         try {
             int hour = Integer.parseInt(timeParts[0]);
             int min = Integer.parseInt(timeParts[1]);
-            // format -> HH:mm
-            String format = String.format("%02d:%02d", hour, min);
-            return hour >= 0 && hour <= 23 && min >= 0 && min <= 59;
+            //return hour >= 0 && hour <= 23 && min >= 0 && min <= 59;
+            if (hour >= 0 && hour <= 23 && min >= 0 && min <= 59) {
+                return true;
+            } else {
+                return false ;
+            }
         } catch (Exception e) {
             return false;
         }
     }
+
 
 }
