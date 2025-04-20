@@ -1,3 +1,5 @@
+package house;
+
 public class Rule {
     private String nameOfDevice ;
     private String time ;

@@ -1,3 +1,5 @@
+package house;
+
 public class Light extends Device{
 
     private int brightness;
